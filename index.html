@@ -47,7 +47,9 @@
       gap: 0.75rem;
     }
     a {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       padding: 1rem 1.25rem;
       background: #18181c;
       border: 1px solid #2a2a30;
@@ -61,6 +63,25 @@
     a:hover {
       border-color: #22c55e;
       background: #1c1c20;
+    }
+    a .card-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #0f0f12;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    a .card-icon img {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+    a .card-text {
+      min-width: 0;
     }
     a span {
       display: block;
@@ -83,12 +104,22 @@
     <p class="tagline">Small web apps, no sign-in</p>
     <nav>
       <a href="https://iphobbes.github.io/QR-Creator/">
-        QR Creator
-        <span>Styled QR codes with logo and caption · PNG, JPEG, SVG</span>
+        <span class="card-icon">
+          <img src="https://iphobbes.github.io/QR-Creator/favicon.svg" alt="" width="24" height="24">
+        </span>
+        <span class="card-text">
+          QR Creator
+          <span>Styled QR codes with logo and caption · PNG, JPEG, SVG</span>
+        </span>
       </a>
       <a href="https://iphobbes.github.io/unix-timestamp-converter/">
-        Unix timestamp converter
-        <span>Convert between Unix time and human-readable date & time</span>
+        <span class="card-icon">
+          <img src="https://iphobbes.github.io/unix-timestamp-converter/favicon.svg" alt="" width="24" height="24">
+        </span>
+        <span class="card-text">
+          Unix timestamp converter
+          <span>Convert between Unix time and human-readable date & time</span>
+        </span>
       </a>
     </nav>
     <footer class="footer">&gt;_ inder</footer>
