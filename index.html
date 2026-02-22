@@ -124,5 +124,15 @@
     </nav>
     <footer class="footer">&gt;_ inder</footer>
   </div>
+  <script>
+    document.querySelectorAll('nav a[href^="http"]').forEach(function (a) {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.open(a.getAttribute('href'), '_blank', 'noopener,noreferrer');
+      });
+    });
+  </script>
 </body>
 </html>
