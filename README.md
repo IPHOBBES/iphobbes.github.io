@@ -1,5 +1,14 @@
 # iphobbes.github.io
 
-Landing page for [https://iphobbes.github.io/](https://iphobbes.github.io/) — links to small web tools (QR Creator, Unix timestamp converter, etc.).
+Landing page for [`https://iphobbes.github.io/`](https://iphobbes.github.io/).
 
-Static HTML + CSS. No build step. GitHub Pages serves from the root.
+A minimal hub linking to small, no‑sign‑in web tools, including:
+
+- **QR Creator** – styled QR codes with logo, caption, and multiple export formats.
+- **Unix timestamp converter** – convert between Unix time and human‑readable date/time.
+
+## Tech
+
+- **Hosting:** GitHub Pages (served from repository root)
+- **Stack:** Static HTML + CSS
+- **Build:** None – no bundler or build step
