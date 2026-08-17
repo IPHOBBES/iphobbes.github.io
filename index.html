@@ -11,6 +11,9 @@
   <style>
     * { box-sizing: border-box; }
     body {
+      --pointer-x: 50vw;
+      --pointer-y: 50vh;
+      --pointer-grid-opacity: 0;
       margin: 0;
       min-height: 100vh;
       font-family: "DM Sans", system-ui, sans-serif;
@@ -26,8 +29,25 @@
       align-items: center;
       justify-content: center;
       padding: 2rem 1.25rem;
+      isolation: isolate;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(215, 249, 6, 0.72) 1px, transparent 1.2px);
+      background-size: 40px 40px;
+      background-position: center;
+      -webkit-mask-image: radial-gradient(circle 150px at var(--pointer-x) var(--pointer-y), #000 0%, rgba(0, 0, 0, 0.85) 35%, transparent 100%);
+      mask-image: radial-gradient(circle 150px at var(--pointer-x) var(--pointer-y), #000 0%, rgba(0, 0, 0, 0.85) 35%, transparent 100%);
+      opacity: var(--pointer-grid-opacity);
+      transition: opacity 0.18s ease;
     }
     .wrap {
+      position: relative;
+      z-index: 1;
       max-width: 480px;
       width: 100%;
       text-align: center;
@@ -122,6 +142,11 @@
         opacity: 0;
       }
     }
+    @media (hover: none), (prefers-reduced-motion: reduce) {
+      body::before {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -160,6 +185,32 @@
     <footer class="footer">&gt;<span class="cursor-blink">_</span> inder</footer>
   </div>
   <script>
+    const canUsePointerGrid = window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches;
+
+    if (canUsePointerGrid) {
+      let pointerFrame = 0;
+      let pointerX = 0;
+      let pointerY = 0;
+
+      document.addEventListener('pointermove', function (event) {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+
+        if (pointerFrame) return;
+
+        pointerFrame = requestAnimationFrame(function () {
+          document.body.style.setProperty('--pointer-x', pointerX + 'px');
+          document.body.style.setProperty('--pointer-y', pointerY + 'px');
+          document.body.style.setProperty('--pointer-grid-opacity', '1');
+          pointerFrame = 0;
+        });
+      });
+
+      document.documentElement.addEventListener('mouseleave', function () {
+        document.body.style.setProperty('--pointer-grid-opacity', '0');
+      });
+    }
+
     document.querySelectorAll('nav a[href^="http"]').forEach(function (a) {
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
